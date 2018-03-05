@@ -3,7 +3,7 @@
 melany
 ======
 
-The goal of melany is to ...
+The goal of melany is to JE TE MODIFIE
 
 Installation
 ------------
