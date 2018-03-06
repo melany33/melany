@@ -47,6 +47,3 @@ mvnpdf <- function(x, mean =  rep(0, nrow(x)),
   return(list(x=x,y=y))
 }
 
-
-?melany
-?mvnpdf
