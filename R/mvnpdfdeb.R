@@ -23,13 +23,15 @@
 #'dnorm(1.96)
 #'
 #'mvnpdf(x=matrix(rep(1.96, 2), nrow=2, ncol=1), Log=FALSE)
+
+
 mvnpdf <- function(x, mean =  rep(0, nrow(x)),
                    varcovM = diag(nrow(x)), Log = TRUE) {
   n <- ncol(x)
   p <- nrow(x)
   x0 <- x - mean
-  Rinv <- 2*solve(varcovM)
-  LogDetvarcovM <- 2*log(det(varcovM))
+  Rinv <- solve(varcovM)
+  LogDetvarcovM <- log(det(varcovM))
 
   y <- NULL
   for (j in 1:n) {
@@ -42,24 +44,6 @@ mvnpdf <- function(x, mean =  rep(0, nrow(x)),
     y <- exp(y)
   }
 
-  res <- list(x = x, y = y)
-  class(res) <- "mvnpdf"
-  return(res)
+  return(list(x=x,y=y))
 }
 
-
-#' Plot of the mvnpdf function
-#'
-#' @param x an object of class \code{mvnpdf} resulting from a call of
-#' \code{mnvpdf()} function.
-#' @param ... graphical parameters passed to \code{plot()} function.
-#'
-#' @return Nothing is returned, only a plot is given.
-#' @export
-#' @importFrom graphics plot
-#' @examples
-#' pdfvalues <- mvnpdf(x=matrix(seq(-3, 3, by = 0.1), nrow = 1), Log=FALSE)
-#' plot(pdfvalues)
-plot.mvnpdf <- function(x, ...) {
-  graphics::plot(x$x, x$y, type = "l", ...)
-}
